@@ -21,9 +21,27 @@ escapeChar = {
     "t" : ' ',
     "v" : ' '
     }
+"""
+timeTrain stores the timestamps of each tweet. It keeps updating with new tweetw coming in
+such that it only contains the timestamps within 60s window
+"""
 timeTrain = []
+"""
+Each element of verList stores the hashtags(a list) extracted from a tweet. It keeps updating
+such that it only contains the hashtags extracted from tweets within 60s window
+"""
 verList = []
+"""
+graph stores the graph formed by the hashtags and keeps updating such that it only contains 
+the hashtags extracted from tweets within 60s window. graph is a dictionary. The key is a 
+vertex of the graph and the value is the list containing the vertices it connects with. There 
+maybe duplicate vertex in the list since the same edge may appears multiple times within the 
+60s window. But this will be taken care of when calculating the averge degree of the graph, by 
+using set(). In this way, multiple edges between 2 vertices are only counted once when calculating 
+the vertex degree.
+"""
 graph = {}
+
 for line in fInput:
     decodeLine = json.loads(line)
     #timeStamp and text is <type 'unicode'> 
